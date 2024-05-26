@@ -4,12 +4,17 @@ import PropertyService from '#services/property_service'
 import Tag from '#models/tag'
 import { propertyValidator } from '#validators/property'
 import { DateTime } from 'luxon'
+import { PropertiesPresenter } from '../dto/properties_presenter.js'
+import { inject } from '@adonisjs/core'
 
+@inject()
 export default class PropertiesController {
-  async index({ response, request }: HttpContext) {
+  constructor(private presenter: PropertiesPresenter) {}
+
+  async getAllPropertiesFilteredPresenter({ inertia, request }: HttpContext) {
     const properties = await PropertyService.getFiltered(request.qs())
-    console.log(properties)
-    return response.redirect().toRoute('properties', { properties })
+    console.log(properties[0])
+    return inertia.render('home', { properties: this.presenter.toJson(properties) })
   }
 
   async create({ request, response, auth }: HttpContext) {

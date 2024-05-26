@@ -1,6 +1,5 @@
 import Property from '#models/property'
 import { PropertySortOptions } from '#types/sort_options'
-
 export default class PropertyService {
   static propertiesPerPage = 30
   static sortOptions: PropertySortOptions[] = [
@@ -24,6 +23,7 @@ export default class PropertyService {
     const sort =
       this.sortOptions.find((option) => option.id === filters.sortBy) || this.sortOptions[0]
     return Property.query()
+      .preload('owner')
       .whereNull('sold_at')
       .if(filters.search, (query) => query.whereILike('name', `%${filters.search}%`))
       .if(filters.minPrice, (query) => query.where('price', '>=', filters.minPrice))
