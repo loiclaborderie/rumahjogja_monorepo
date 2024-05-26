@@ -1,14 +1,25 @@
 <script setup lang="ts">
-import { Head } from '@inertiajs/vue3'
+import { InferPageProps } from '@adonisjs/inertia/types'
+import PropertiesController from '#controllers/properties_controller'
+import { toRefs } from 'vue'
+import Property from '~/components/Property.vue'
 
-defineProps<{ version: number }>()
+const props = defineProps<{
+  properties: InferPageProps<
+    PropertiesController,
+    'getAllPropertiesFilteredPresenter'
+  >['properties']
+}>()
+const { properties } = toRefs(props)
 </script>
 
 <template>
-  <Head title="Homepage" />
-
   <div class="container">
-    <div class="title">AdonisJS {{ version }} x Inertia x Vue.js</div>
+    <ul id="propertyDisplay">
+      <li v-for="property in properties.data" :key="property.id">
+        <Property :property="property" />
+      </li>
+    </ul>
 
     <span>
       Learn more about AdonisJS and Inertia.js by visiting the
