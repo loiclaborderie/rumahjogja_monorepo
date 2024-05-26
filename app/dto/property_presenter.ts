@@ -1,5 +1,5 @@
 import type Property from '#models/property'
-import PropertyPresented from '#types/property_presented'
+import type PropertyPresented from '#types/property_presented'
 
 export class PropertyPresenter {
   toJson(property: Property): PropertyPresented {

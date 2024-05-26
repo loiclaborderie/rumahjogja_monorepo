@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { InferPageProps } from '@adonisjs/inertia/types'
-import PropertiesController from '#controllers/properties_controller'
+import type PropertiesController from '#controllers/properties_controller'
 import { toRefs } from 'vue'
 import Property from '~/components/Property.vue'
 
