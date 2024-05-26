@@ -3,6 +3,8 @@ import { createApp, h } from 'vue'
 import type { DefineComponent } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 import { resolvePageComponent } from '@adonisjs/inertia/helpers'
+import PrimeVue from 'primevue/config'
+import Card from 'primevue/card'
 
 const appName = import.meta.env.VITE_APP_NAME || 'AdonisJS'
 
@@ -23,6 +25,8 @@ createInertiaApp({
     createApp({ render: () => h(App, props) })
     
       .use(plugin)
+      .use(PrimeVue)
+      .component('Card', Card)
       .mount(el)
   },
 })
