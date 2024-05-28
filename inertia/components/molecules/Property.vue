@@ -3,7 +3,9 @@
     <template #header>
       <!-- <img alt="user header" src="/images/usercard.png" /> -->
     </template>
-    <template #title>{{ property.name }} - {{ property.price }}€</template>
+    <template #title
+      ><h1>{{ property.name }} - {{ property.price }}€</h1></template
+    >
     <template #subtitle>Card subtitle</template>
     <template #content>
       <p class="m-0">

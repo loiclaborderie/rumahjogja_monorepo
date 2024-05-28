@@ -2,7 +2,7 @@
 import { InferPageProps } from '@adonisjs/inertia/types'
 import type PropertiesController from '#controllers/properties_controller'
 import { toRefs } from 'vue'
-import Property from '~/components/Property.vue'
+import Property from '../molecules/Property.vue'
 
 const props = defineProps<{
   properties: InferPageProps<

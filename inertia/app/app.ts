@@ -1,4 +1,4 @@
-import '../css/app.css';
+import '../css/app.css'
 import { createApp, h } from 'vue'
 import type { DefineComponent } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
@@ -15,15 +15,13 @@ createInertiaApp({
 
   resolve: (name) => {
     return resolvePageComponent(
-      `../pages/${name}.vue`,
-      import.meta.glob<DefineComponent>('../pages/**/*.vue'),
+      `../components/pages/${name}.vue`,
+      import.meta.glob<DefineComponent>('../components/pages/**/*.vue')
     )
   },
 
   setup({ el, App, props, plugin }) {
-    
     createApp({ render: () => h(App, props) })
-    
       .use(plugin)
       .use(PrimeVue)
       .component('Card', Card)
