@@ -9,5 +9,10 @@
       "~/*": ["./*"]
     }
   },
-  "include": ["./**/*.ts", "./components/**/*.vue", "./components/**/**/*.vue"]
+  "include": [
+    "./**/*.ts",
+    "./components/**/*.vue",
+    "./components/**/**/*.vue",
+    "./css/presets/lara/lara.d.ts"
+  ]
 }

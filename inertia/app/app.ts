@@ -4,12 +4,11 @@ import type { DefineComponent } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 import { resolvePageComponent } from '@adonisjs/inertia/helpers'
 import PrimeVue from 'primevue/config'
+import Lara from '~/css/presets/lara'
 import Card from 'primevue/card'
 import Button from 'primevue/button'
 import Paginator from 'primevue/paginator'
 import Galleria from 'primevue/galleria'
-import 'primevue/resources/themes/lara-light-green/theme.css'
-import 'primevue/resources/primevue.min.css'
 
 const appName = import.meta.env.VITE_APP_NAME || 'AdonisJS'
 
@@ -28,7 +27,10 @@ createInertiaApp({
   setup({ el, App, props, plugin }) {
     createApp({ render: () => h(App, props) })
       .use(plugin)
-      .use(PrimeVue)
+      .use(PrimeVue, {
+        unstyled: true,
+        pt: Lara,
+      })
       .component('Card', Card)
       .component('Button', Button)
       .component('Paginator', Paginator)
