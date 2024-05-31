@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { InferPageProps } from '@adonisjs/inertia/types'
 import type PropertiesController from '#controllers/properties_controller'
-import { ref, toRefs, watch } from 'vue'
+import { ref, toRefs, watch, computed } from 'vue'
 import Property from '../molecules/Property.vue'
 import Paginator from 'primevue/paginator'
 import { router } from '@inertiajs/vue3'
@@ -13,6 +13,13 @@ const props = defineProps<{
   >['properties']
 }>()
 const { properties } = toRefs(props)
+const screenSize = ref(window.innerWidth)
+const paginatorMessage = computed(() => {
+  if (screenSize.value > 450) {
+    return `Showing ${properties.value.page.current} to ${properties.value.page.perPage} of ${properties.value.page.total}`
+  }
+  return `${properties.value.page.current} - ${Math.ceil(properties.value.page.total / properties.value.page.perPage)}`
+})
 
 const currentPage = ref((properties.value.page.current - 1) * properties.value.page.perPage)
 
@@ -34,17 +41,12 @@ watch(currentPage, async (newItemNumbers) => {
     </span>
   </div>
   <Paginator
-    :template="{
-      '640px': 'PrevPageLink CurrentPageReport NextPageLink',
-      '960px': 'FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink',
-      '1300px': 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink',
-      'default': 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink JumpToPageInput',
-    }"
+    template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+    :currentPageReportTemplate="paginatorMessage"
     :rows="properties.page.perPage"
     :totalRecords="properties.page.total"
     v-model:first="currentPage"
-  >
-  </Paginator>
+  />
 </template>
 
 <style scoped>
