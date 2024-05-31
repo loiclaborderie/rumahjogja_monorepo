@@ -9,6 +9,7 @@ import Card from 'primevue/card'
 import Button from 'primevue/button'
 import Paginator from 'primevue/paginator'
 import Galleria from 'primevue/galleria'
+import 'primeicons/primeicons.css'
 
 const appName = import.meta.env.VITE_APP_NAME || 'AdonisJS'
 
