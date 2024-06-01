@@ -13,4 +13,4 @@ router.on('/inertia').renderInertia('home', { version: 6 })
 router.get('/', ({ response }) => {
   response.redirect().toPath('/homes')
 })
-router.get('/homes', [PropertiesController, 'getAllPropertiesFilteredPresenter'])
+router.get('/homes', [PropertiesController, 'getAllPropertiesFiltered'])

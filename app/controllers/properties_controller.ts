@@ -6,15 +6,19 @@ import { propertyValidator } from '#validators/property'
 import { DateTime } from 'luxon'
 import { PropertiesPresenter } from '../dto/properties_presenter.js'
 import { inject } from '@adonisjs/core'
+import { propertyFilterValidator } from '#validators/property_filter'
 
 @inject()
 export default class PropertiesController {
   constructor(private presenter: PropertiesPresenter) {}
 
-  async getAllPropertiesFilteredPresenter({ inertia, request }: HttpContext) {
-    const properties = await PropertyService.getFiltered(request.qs())
-    console.log(properties[0])
-    return inertia.render('home', { properties: this.presenter.toJson(properties) })
+  async getAllPropertiesFiltered({ inertia, request }: HttpContext) {
+    const validatedFilters = await propertyFilterValidator.validate(request.qs())
+    const properties = await PropertyService.getFiltered(validatedFilters)
+    return inertia.render('home', {
+      properties: this.presenter.toJson(properties),
+      queryFilters: validatedFilters,
+    })
   }
 
   async create({ request, response, auth }: HttpContext) {
