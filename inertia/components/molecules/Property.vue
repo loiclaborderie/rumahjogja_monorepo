@@ -26,7 +26,7 @@
               'absolute translate-y-[-50%] top 50% inline-flex justify-center items-center overflow-hidden bg-transparent text-white w-16 h-16 transition duration-200 ease-in-out rounded-md opacity-0 group-hover:opacity-100 mx-2 top-1/2 mt-[-0.5rem] right-0 !absolute hover:bg-surface-0/10 hover:text-white focus:outline-none focus:outline-offset-0 focus:ring focus:ring-primary-400/50 dark:focus:ring-primary-300/50',
             indicators:
               'absolute bottom-0 left-0 right-0 flex items-center justify-center p-4 order-2 z-10',
-            indicatorbutton: ({ context }) => ({
+            indicatorbutton: ({ context }: any) => ({
               class: [
                 'w-3 h-3',
                 'rounded-full transition duration-200',
