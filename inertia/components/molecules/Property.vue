@@ -1,5 +1,5 @@
 <template>
-  <Link :href="'/home/' + property.id">
+  <Link :href="`/home/${property.id}`">
     <Card
       style="overflow: hidden"
       :pt="{
@@ -72,7 +72,15 @@
       </template>
       <template #footer>
         <div class="flex gap-3 mt-1">
-          <Button label="Chat" severity="secondary" outlined class="w-full" icon="pi pi-comment" />
+          <Link :href="`/chat/${property.owner.id}`">
+            <Button
+              label="Chat"
+              severity="secondary"
+              outlined
+              class="w-full"
+              icon="pi pi-comment"
+            />
+          </Link>
           <Button label="Call" class="w-full" icon="pi pi-phone" raised />
         </div>
       </template>
