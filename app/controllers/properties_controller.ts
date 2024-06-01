@@ -7,6 +7,7 @@ import { DateTime } from 'luxon'
 import { PropertiesPresenter } from '../dto/properties_presenter.js'
 import { inject } from '@adonisjs/core'
 import { propertyFilterValidator } from '#validators/property_filter'
+import { PropertyDetailsPresenter } from '../dto/property_details_presenter.js'
 
 @inject()
 export default class PropertiesController {
@@ -18,6 +19,18 @@ export default class PropertiesController {
     return inertia.render('home', {
       properties: this.presenter.toJson(properties),
       queryFilters: validatedFilters,
+    })
+  }
+
+  async getProperty({ inertia, params }: HttpContext) {
+    const property = await Property.query()
+      .preload('owner')
+      .preload('tags')
+      .where('id', params.id)
+      .whereNull('sold_at')
+      .firstOrFail()
+    return inertia.render('propertydetails', {
+      property: new PropertyDetailsPresenter().toJson(property),
     })
   }
 

@@ -14,3 +14,4 @@ router.get('/', ({ response }) => {
   response.redirect().toPath('/homes')
 })
 router.get('/homes', [PropertiesController, 'getAllPropertiesFiltered'])
+router.get('/home/:id', [PropertiesController, 'getProperty'])
